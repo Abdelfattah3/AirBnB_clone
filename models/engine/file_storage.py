@@ -28,10 +28,13 @@ class FileStorage:
 
     def save(self):
         """save the updated dictionary"""
+        dct = {}
+        for key, value in FileStorage.__objects.items():
+            dct[key] = value.to_dict()
         with open(self.__file_path, "w", encoding='UTF8') as file:
-            json.dump(self.__objects, file)
+            json.dump(dct, file)
 
     def reload(self):
         """reload from the json file"""
         with open(self.__file_path, "r", encoding='UTF8') as file:
-            json.load(file)
+            FileStorage.__objects = json.load(file)
