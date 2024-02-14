@@ -16,9 +16,10 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    value = str(datetime.isoformat())
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != '__class__':
                     setattr(self, key, value)
+        
 
     def to_dict(self):
         """manipulating the dict of class to be human readable
