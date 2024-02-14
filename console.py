@@ -23,6 +23,10 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def default(self, arg):
+        """do nothing when empty input
+        """
+        return super().default(arg)
     # def do_help(self, arg):
     #     """Show documented Commands"""
     #     pass
