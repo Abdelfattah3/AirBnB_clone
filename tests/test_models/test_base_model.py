@@ -8,7 +8,7 @@ from time import sleep
 from models.base_model import BaseModel
 
 
-class Test_instance(unittest.TestCase):
+class TestBaseModel_instance(unittest.TestCase):
 
     def test_no_args_instantiates(self):
         self.assertEqual(BaseModel, type(BaseModel()))

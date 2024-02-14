@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Basemodel class that will be inheeited"""
+import models
 from datetime import datetime
 from uuid import uuid4
 
@@ -19,7 +20,6 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != '__class__':
                     setattr(self, key, value)
-        
 
     def to_dict(self):
         """manipulating the dict of class to be human readable
@@ -43,3 +43,5 @@ class BaseModel:
     def save(self):
         """Update the time if the object is updated"""
         self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()
