@@ -13,6 +13,12 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    value = str(datetime.isoformat())
+                if key != '__class__':
+                    setattr(self, key, value)
 
     def to_dict(self):
         """manipulating the dict of class to be human readable
