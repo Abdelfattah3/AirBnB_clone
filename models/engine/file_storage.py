@@ -2,7 +2,7 @@
 """Filestorage that will handle the objects"""
 
 import json
-from models.base_model import BaseModel
+import models
 
 
 class FileStorage:
