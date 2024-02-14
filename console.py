@@ -13,23 +13,21 @@ class HBNBCommand(cmd.Cmd):
         """Initalize the CLI"""
         super().__init__()
 
+    def emptyline(self):
+        """do nothing on empty line
+        """
+        pass
+
     def do_EOF(self, arg):
         """command to exit the program
         """
+        print("")
         return True
 
     def do_quit(self, arg):
         """Quit command to exit the program
         """
         return True
-
-    def default(self, arg):
-        """do nothing when empty input
-        """
-        return super().default(arg)
-    # def do_help(self, arg):
-    #     """Show documented Commands"""
-    #     pass
 
 
 if __name__ == '__main__':
