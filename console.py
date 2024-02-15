@@ -3,6 +3,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models import FileStorage
 from models import storage
 
 
@@ -68,9 +69,9 @@ class HBNBCommand(cmd.Cmd):
             objs = []
             for obj in storage.all().values():
                 if len(args) > 0 and args[0] == obj.__class__.__name__:
-                    objs.append(obj.__str__)
+                    objs.append(obj.__str__())
                 elif len(args) == 0:
-                    objs.append(obj.__str__)
+                    objs.append(obj.__str__())
             print(objs)
 
     def do_update(self, arg):
