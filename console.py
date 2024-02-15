@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(arg[0], arg[1]) not in obj_dict.keys():
+        if "{}.{}".format(args[0], args[1]) not in obj_dict.keys():
             print("** no instance found **")
             return False
         if len(args) == 2:
@@ -96,6 +96,7 @@ class HBNBCommand(cmd.Cmd):
             except NameError:
                 print("** value missing **")
                 return False
+        
         if len(args) == 4:
             objs = obj_dict["{}.{}".format(args[0], args[1])]
             if args[2] == objs.__class__.__dict__.keys():
