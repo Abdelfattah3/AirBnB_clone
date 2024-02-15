@@ -38,9 +38,9 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
         else:
-            obj = HBNBCommand.__mods[args[0]]()
-            print(obj.id)
+            obj = eval(args[0])()
             storage.save()
+            print(obj.id)
 
     def do_show(self, arg):
         """Show command to show specific instance"""
