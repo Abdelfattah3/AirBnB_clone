@@ -3,7 +3,7 @@
 
 import cmd
 from models.base_model import BaseModel
-import models
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Show command to show specific instance"""
         args = arg.split()
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if not args:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__mods.keys():
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """Destroy command to delete specific instance"""
         args = arg.split()
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if not args:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__mods.keys():
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         else:
             del obj_dict["{}.{}".format(args[0], args[1])]
-            models.storage.save()
+            storage.save()
 
     def do_all(self, arg):
         """prints all the objects string rep"""
@@ -65,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             objs = []
-            for obj in models.storage.all().values():
+            for obj in storage.all().values():
                 if len(args) > 0 and args[0] == obj.__class__.__name__:
                     objs.append(obj.__str__())
                 elif len(args) == 0:
@@ -74,22 +74,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         args = arg.split()
-        obj_dict = models.storage.all()
+        obj_dict =  storage.all()
         if len(args) == 0:
             print("** class name missing **")
-            return False
         if args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
-            return False
         if len(args) == 1:
             print("** instance id missing **")
-            return False
         if "{}.{}".format(args[0], args[1]) not in obj_dict.keys():
             print("** no instance found **")
-            return False
         if len(args) == 2:
             print("** attribute name missing **")
-            return False
         if len(args) == 3:
             try:
                 type(eval(args[2])) != dict
@@ -113,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
                     objs.__class__.__dict__[k] = valty[v]
                 else:
                     objs.__class__.__dict__[k] = v
-        models.storage.save()
+        storage.save()
 
     def emptyline(self):
         """do nothing on empty line
