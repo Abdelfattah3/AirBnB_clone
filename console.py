@@ -19,14 +19,14 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """Create a new model asn saves to Json file"""
         args = arg.split()
-        if not args:
+        if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__mods.keys():
+        elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
         else:
             obj = BaseModel()
-            obj.save()
             print(obj.id)
+            storage.save()
 
     def do_show(self, arg):
         """Show command to show specific instance"""
