@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj = eval(args[0])()
             storage.save()
-            print(obj.id)
+            print(f"{obj.id}")
 
     def do_show(self, arg):
         """Show command to show specific instance"""
