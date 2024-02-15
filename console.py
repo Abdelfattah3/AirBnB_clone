@@ -14,9 +14,9 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     __mods = {'BaseModel': BaseModel}
 
-    def __init__(self):
-        """Initalize the CLI"""
-        super().__init__()
+    # def __init__(self):
+    #     """Initalize the CLI"""
+    #     super().__init__()
 
     def do_create(self, arg):
         """Create a new model asn saves to Json file"""
