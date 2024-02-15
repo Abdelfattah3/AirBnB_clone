@@ -14,9 +14,21 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     __mods = {'BaseModel': BaseModel}
 
-    # def __init__(self):
-    #     """Initalize the CLI"""
-    #     super().__init__()
+    def emptyline(self):
+        """do nothing on empty line
+        """
+        pass
+
+    def do_EOF(self, arg):
+        """command to exit the program
+        """
+        print("")
+        return True
+
+    def do_quit(self, arg):
+        """Quit command to exit the program
+        """
+        return True
 
     def do_create(self, arg):
         """Create a new model asn saves to Json file"""
@@ -121,22 +133,6 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     objs.__class__.__dict__[k] = v
         storage.save()
-
-    def emptyline(self):
-        """do nothing on empty line
-        """
-        pass
-
-    def do_EOF(self, arg):
-        """command to exit the program
-        """
-        print("")
-        return True
-
-    def do_quit(self, arg):
-        """Quit command to exit the program
-        """
-        return True
 
 
 if __name__ == '__main__':
