@@ -74,26 +74,34 @@ class HBNBCommand(cmd.Cmd):
             print(objs)
 
     def do_update(self, arg):
-        """Upadte the Json file and objects attributes"""
+        """Usage: update <class> <id> <attribute_name> <attribute_value> or
+       <class>.update(<id>, <attribute_name>, <attribute_value>) or
+       <class>.update(<id>, <dictionary>)
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary."""
         args = arg.split()
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
+            return False
         if args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
+            return False
         if len(args) == 1:
             print("** instance id missing **")
+            return False
         if "{}.{}".format(args[0], args[1]) not in obj_dict.keys():
             print("** no instance found **")
+            return False
         if len(args) == 2:
             print("** attribute name missing **")
+            return False
         if len(args) == 3:
             try:
                 type(eval(args[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
-
         if len(args) == 4:
             objs = obj_dict["{}.{}".format(args[0], args[1])]
             if args[2] == objs.__class__.__dict__.keys():
