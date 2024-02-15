@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Create a new model asn saves to Json file"""
-        args = arg.split()
+        args = arg.split(" ")
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__mods:
@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Show command to show specific instance"""
-        args = arg.split()
+        args = arg.split(" ")
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Destroy command to delete specific instance"""
-        args = arg.split()
+        args = arg.split(" ")
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
@@ -61,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """prints all the objects string rep"""
-        args = arg.split()
+        args = arg.split(" ")
         if len(args) > 0 and args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
         else:
@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
        <class>.update(<id>, <dictionary>)
         Update a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
-        args = arg.split()
+        args = arg.split(" ")
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
