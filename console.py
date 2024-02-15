@@ -48,14 +48,34 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
+            return
         elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
+            return
         elif len(args) == 1:
             print("** instance id missing **")
+            return
         elif "{}.{}".format(args[0], args[1]) not in obj_dict:
             print("** no instance found **")
+            return
         else:
             print(obj_dict["{}.{}".format(args[0], args[1])])
+            return
+
+    def do_all(self, arg):
+        """prints all the objects string rep"""
+        args = arg.split(" ")
+        if len(args) > 0 and args[0] not in HBNBCommand.__mods:
+            print("** class doesn't exist **")
+            return
+        else:
+            objs = []
+            for obj in storage.all().values():
+                if len(args) > 0 and args[0] == obj.__class__.__name__:
+                    objs.append(obj.__str__())
+                elif len(args) == 0:
+                    objs.append(obj.__str__())
+            print(objs)
 
     def do_destroy(self, arg):
         """Destroy command to delete specific instance"""
@@ -72,20 +92,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             del obj_dict["{}.{}".format(args[0], args[1])]
             storage.save()
-
-    def do_all(self, arg):
-        """prints all the objects string rep"""
-        args = arg.split(" ")
-        if len(args) > 0 and args[0] not in HBNBCommand.__mods:
-            print("** class doesn't exist **")
-        else:
-            objs = []
-            for obj in storage.all().values():
-                if len(args) > 0 and args[0] == obj.__class__.__name__:
-                    objs.append(obj.__str__())
-                elif len(args) == 0:
-                    objs.append(obj.__str__())
-            print(objs)
 
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
