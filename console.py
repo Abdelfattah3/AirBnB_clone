@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """CLI for handling data input"""
 
+import sys
 import cmd
+import models
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
 from models import storage
-from models import *
 
 
 class HBNBCommand(cmd.Cmd):
@@ -143,3 +143,13 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
+    # if not sys.stdin.isatty():
+    #     '''method is used to interpret the input as a comand'''
+    #     for line in sys.stdin:
+    #         '''Read command line by line'''
+
+    #         HBNBCommand().onecmd(line.strip())
+    #         '''method to remove whitespace from beg end'''
+    # else:
+    #     HBNBCommand().cmdloop()
