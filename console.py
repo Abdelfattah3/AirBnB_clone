@@ -32,11 +32,11 @@ class HBNBCommand(cmd.Cmd):
         """Show command to show specific instance"""
         args = arg.split()
         obj_dict = storage.all()
-        if not args:
+        if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__mods.keys():
+        elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
-        elif len(args) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(args[0], args[1]) not in obj_dict:
             print("** no instance found **")
@@ -47,11 +47,11 @@ class HBNBCommand(cmd.Cmd):
         """Destroy command to delete specific instance"""
         args = arg.split()
         obj_dict = storage.all()
-        if not args:
+        if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__mods.keys():
+        elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
-        elif len(args) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(args[0], args[1]) not in obj_dict:
             print("** no instance found **")
@@ -68,12 +68,13 @@ class HBNBCommand(cmd.Cmd):
             objs = []
             for obj in storage.all().values():
                 if len(args) > 0 and args[0] == obj.__class__.__name__:
-                    objs.append(obj.__str__())
+                    objs.append(obj.__str__)
                 elif len(args) == 0:
-                    objs.append(obj.__str__())
+                    objs.append(obj.__str__)
             print(objs)
 
     def do_update(self, arg):
+        """Upadte the Json file and objects attributes"""
         args = arg.split()
         obj_dict = storage.all()
         if len(args) == 0:
