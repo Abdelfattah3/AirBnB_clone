@@ -91,8 +91,11 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return False
         if len(args) == 3:
-            print("** value missing **")
-            return False
+            try:
+                type(eval(args[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
         if len(args) == 4:
             objs = obj_dict["{}.{}".format(args[0], args[1])]
             if args[2] == objs.__class__.__dict__.keys():
