@@ -9,5 +9,5 @@ class User(BaseModel):
 
     email = ""
     password = ""
-    first_nam = ""
-    last_name = ""
+    first_name = ""
+    last_namee = ""
