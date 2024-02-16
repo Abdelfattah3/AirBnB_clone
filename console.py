@@ -6,13 +6,15 @@ import cmd
 import models
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """Comman line interface for user input"""
 
     prompt = "(hbnb) "
-    __mods = {'BaseModel': BaseModel}
+    __mods = {'BaseModel': BaseModel,
+              "User": User}
 
     def emptyline(self):
         """do nothing on empty line
