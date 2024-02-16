@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Create a new model asn saves to Json file"""
-        args = arg.split(" ")
+        args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__mods:
