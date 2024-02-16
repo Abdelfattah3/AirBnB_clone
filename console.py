@@ -7,14 +7,23 @@ import models
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
-
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Comman line interface for user input"""
 
     prompt = "(hbnb) "
     __mods = {'BaseModel',
-              "User"}
+              "User",
+              "Review",
+              "Place",
+              "Amenity",
+              "City",
+              "State"}
 
     def emptyline(self):
         """do nothing on empty line

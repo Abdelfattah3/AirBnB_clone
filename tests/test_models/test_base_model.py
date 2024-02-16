@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """unittesting for Basemodel Class"""
 
+import os
 import models
 import unittest
 from datetime import datetime
