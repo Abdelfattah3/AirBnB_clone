@@ -2,7 +2,8 @@
 """Filestorage that will handle the objects"""
 
 import json
-import models
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -18,30 +19,28 @@ class FileStorage:
         Returns:
             _type_: Dict
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """sets new objects"""
-        key_obj = str(obj.__class__.__name__) + "." + str(obj.id)
-        value_obj = obj
-        FileStorage.__objects[key_obj] = value_obj
+        key_obj = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(key_obj, obj.id)] = obj
 
     def save(self):
         """save the updated dictionary"""
-        dct = {}
-        for key, value in FileStorage.__objects.items():
-            dct[key] = value.to_dict()
+        dct = FileStorage.__objects
+        obj_dict = {obj: dct[obj].to_dict() for obj in dct.keys()}
         with open(FileStorage.__file_path, "w", encoding='UTF8') as file:
-            json.dump(dct, file)
+            json.dump(obj_dict, file)
 
     def reload(self):
         """reload from the json file"""
         try:
-            with open(FileStorage.__file_path, "r", encoding='UTF8') as file:
-                FileStorage.__objects = json.load(file)
-            for key, value in FileStorage.__objects.items():
-                class_name = value["__class__"]
-                class_name = models.classes[class_name]
-                FileStorage.__objects[key] = class_name(**value)
+            with open(FileStorage.__file_path, encoding="UTF8") as file:
+                obj_dict = json.load(file)
+            for o in obj_dict.values():
+                class_name = o["__class__"]
+                del o["__class__"]
+                self.new(eval(class_name)(**o))
         except FileNotFoundError:
-            pass
+            return

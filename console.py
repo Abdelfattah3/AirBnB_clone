@@ -13,8 +13,8 @@ class HBNBCommand(cmd.Cmd):
     """Comman line interface for user input"""
 
     prompt = "(hbnb) "
-    __mods = {'BaseModel': BaseModel,
-              "User": User}
+    __mods = {'BaseModel',
+              "User"}
 
     def emptyline(self):
         """do nothing on empty line
@@ -40,9 +40,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.__mods:
             print("** class doesn't exist **")
         else:
-            obj = eval(args[0])()
+            print(eval(args[0])().id)
             storage.save()
-            print(f"{obj.id}")
 
     def do_show(self, arg):
         """Show command to show specific instance"""

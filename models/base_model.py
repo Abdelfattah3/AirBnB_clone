@@ -20,6 +20,8 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != '__class__':
                     setattr(self, key, value)
+        else:
+            models.storage.new(self)
 
     def to_dict(self):
         """manipulating the dict of class to be human readable
@@ -43,5 +45,4 @@ class BaseModel:
     def save(self):
         """Update the time if the object is updated"""
         self.updated_at = datetime.now()
-        models.storage.new(self)
         models.storage.save()
