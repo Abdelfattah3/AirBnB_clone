@@ -3,9 +3,18 @@
     margin: 30px 0px;
 }
 
-p {
+* {
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #484848;
     font-size: 14px;
 
+}
+h3 {
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+h4 {
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 0;
 }
